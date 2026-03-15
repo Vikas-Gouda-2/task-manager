@@ -29,15 +29,12 @@ Render deploys directly from GitHub. You need to push your code there first.
 In your terminal, inside `/Users/viswa/Documents/task_manager`:
 
 ```bash
-git init
-git add .
-git commit -m "Initial commit: Task Manager app"
-git branch -M main
 git remote add origin https://github.com/Vikas-Gouda-2/task-manager.git
+git branch -M main
 git push -u origin main
 ```
 
-Replace `Vikas-Gouda-2` with your actual GitHub username.
+Your code is ready! Just execute the commands above to push to GitHub.
 
 ---
 
