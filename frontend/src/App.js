@@ -9,7 +9,7 @@ import Dashboard from "./Dashboard";
 import TaskDetailsModal from "./TaskDetailsModal";
 
 // API Base URL - Render backend
-const API_BASE_URL = "https://task-manager-api-25gl.onrender.com";
+const API_BASE_URL = "https://task-manager-api-25g1.onrender.com";
 
 // Spring Physics configurations
 const springTransition = {

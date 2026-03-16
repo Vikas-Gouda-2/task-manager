@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, Calendar, Tag, AlignLeft, CheckCircle2, Circle, Trash2, Plus, Flag } from 'lucide-react';
 
 // API Base URL - Render backend
-const API_BASE_URL = "https://task-manager-api-25gl.onrender.com";
+const API_BASE_URL = "https://task-manager-api-25g1.onrender.com";
 
 const TaskDetailsModal = ({ task, isOpen, onClose, onUpdate, onDelete }) => {
   const [activeTask, setActiveTask] = useState(task);
