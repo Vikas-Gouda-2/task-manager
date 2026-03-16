@@ -365,28 +365,28 @@ function App() {
                 <motion.div key="tasks" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} className="space-y-12">
                   
                   {/* Task Input */}
-                  <form onSubmit={addTask} className={`relative glass-panel rounded-[2.5rem] p-4 border transition-all duration-500 ${isFocused ? 'border-[var(--accent-color)]/50 shadow-2xl' : 'border-white/10'}`}>
-                    <div className="flex items-center group">
-                      <Plus className={`w-8 h-8 ml-4 transition-all duration-700 ${isFocused ? `text-[var(--accent-color)] rotate-90 scale-110` : 'text-white/20'}`} />
+                  <form onSubmit={addTask} className={`relative glass-panel rounded-[2.5rem] p-3 sm:p-4 border transition-all duration-500 ${isFocused ? 'border-[var(--accent-color)]/50 shadow-2xl' : 'border-white/10'}`}>
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-0 group">
+                      <Plus className={`w-6 sm:w-8 h-6 sm:h-8 ml-3 sm:ml-4 transition-all duration-700 flex-shrink-0 ${isFocused ? `text-[var(--accent-color)] rotate-90 scale-110` : 'text-white/20'}`} />
                       <input 
-                        className="flex-1 bg-transparent border-none px-6 py-6 text-2xl font-bold placeholder:text-white/10 text-white outline-none"
+                        className="flex-1 bg-transparent border-none px-3 sm:px-6 py-4 sm:py-6 text-xl sm:text-2xl font-bold placeholder:text-white/10 text-white outline-none w-full"
                         placeholder="What needs solving?"
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
                         onFocus={() => setIsFocused(true)}
                         onBlur={() => setIsFocused(false)}
                       />
-                      <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} type="submit" disabled={!title.trim()} className={`mr-2 px-10 py-5 rounded-[1.5rem] font-bold transition-all shadow-xl ${title.trim() ? 'bg-gradient-to-r from-fuchsia-600 to-indigo-600 text-white' : 'bg-white/5 text-white/10 cursor-not-allowed border border-white/5'}`}>Add Action</motion.button>
+                      <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} type="submit" disabled={!title.trim()} className={`flex-shrink-0 mx-2 px-6 sm:px-10 py-3 sm:py-5 rounded-[1.5rem] font-bold text-xs sm:text-base transition-all shadow-xl ${title.trim() ? 'bg-gradient-to-r from-fuchsia-600 to-indigo-600 text-white' : 'bg-white/5 text-white/10 cursor-not-allowed border border-white/5'}`}>Add</motion.button>
                     </div>
                     {isFocused && (
-                      <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} className="flex items-center gap-6 px-10 pb-4 pt-4 border-t border-white/5 mt-2">
-                        <div className="flex items-center gap-2 group/field">
-                          <Calendar className="w-4 h-4 text-white/30 group-hover/field:text-cyan-400" />
-                          <input type="date" value={dueDate} onChange={e => setDueDate(e.target.value)} className="bg-transparent text-sm text-white/60 outline-none cursor-pointer hover:text-white" />
+                      <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-6 px-3 sm:px-10 pb-3 sm:pb-4 pt-3 sm:pt-4 border-t border-white/5 mt-2">
+                        <div className="flex items-center gap-2 group/field w-full sm:w-auto">
+                          <Calendar className="w-4 h-4 text-white/30 group-hover/field:text-cyan-400 flex-shrink-0" />
+                          <input type="date" value={dueDate} onChange={e => setDueDate(e.target.value)} className="bg-transparent text-xs sm:text-sm text-white/60 outline-none cursor-pointer hover:text-white w-full sm:w-auto" />
                         </div>
-                        <div className="flex items-center gap-2 group/field">
-                          <Tag className="w-4 h-4 text-white/30 group-hover/field:text-fuchsia-400" />
-                          <input type="text" placeholder="Add Category" value={category} onChange={e => setCategory(e.target.value)} className="bg-transparent text-sm text-white/60 outline-none w-32 placeholder:text-white/10 hover:text-white" />
+                        <div className="flex items-center gap-2 group/field w-full sm:w-auto">
+                          <Tag className="w-4 h-4 text-white/30 group-hover/field:text-fuchsia-400 flex-shrink-0" />
+                          <input type="text" placeholder="Add Category" value={category} onChange={e => setCategory(e.target.value)} className="bg-transparent text-xs sm:text-sm text-white/60 outline-none w-full sm:w-32 placeholder:text-white/10 hover:text-white" />
                         </div>
                       </motion.div>
                     )}
