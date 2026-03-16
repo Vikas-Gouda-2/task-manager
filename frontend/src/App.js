@@ -366,17 +366,19 @@ function App() {
                   
                   {/* Task Input */}
                   <form onSubmit={addTask} className={`relative glass-panel rounded-[2.5rem] p-3 sm:p-4 border transition-all duration-500 ${isFocused ? 'border-[var(--accent-color)]/50 shadow-2xl' : 'border-white/10'}`}>
-                    <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-0 group">
-                      <Plus className={`w-6 sm:w-8 h-6 sm:h-8 ml-3 sm:ml-4 transition-all duration-700 flex-shrink-0 ${isFocused ? `text-[var(--accent-color)] rotate-90 scale-110` : 'text-white/20'}`} />
-                      <input 
-                        className="flex-1 bg-transparent border-none px-3 sm:px-6 py-4 sm:py-6 text-xl sm:text-2xl font-bold placeholder:text-white/10 text-white outline-none w-full"
-                        placeholder="What needs solving?"
-                        value={title}
-                        onChange={(e) => setTitle(e.target.value)}
-                        onFocus={() => setIsFocused(true)}
-                        onBlur={() => setIsFocused(false)}
-                      />
-                      <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} type="submit" disabled={!title.trim()} className={`flex-shrink-0 mx-2 px-6 sm:px-10 py-3 sm:py-5 rounded-[1.5rem] font-bold text-xs sm:text-base transition-all shadow-xl ${title.trim() ? 'bg-gradient-to-r from-fuchsia-600 to-indigo-600 text-white' : 'bg-white/5 text-white/10 cursor-not-allowed border border-white/5'}`}>Add</motion.button>
+                    <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-0 group">
+                      <div className="flex items-center gap-2 flex-1">
+                        <Plus className={`w-6 sm:w-8 h-6 sm:h-8 ml-2 sm:ml-4 transition-all duration-700 flex-shrink-0 ${isFocused ? `text-[var(--accent-color)] rotate-90 scale-110` : 'text-white/20'}`} />
+                        <input 
+                          className="flex-1 bg-transparent border-none px-2 sm:px-6 py-4 sm:py-6 text-lg sm:text-2xl font-bold placeholder:text-white/10 text-white outline-none"
+                          placeholder="What needs solving?"
+                          value={title}
+                          onChange={(e) => setTitle(e.target.value)}
+                          onFocus={() => setIsFocused(true)}
+                          onBlur={() => setIsFocused(false)}
+                        />
+                      </div>
+                      <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} type="submit" disabled={!title.trim()} className={`w-full sm:w-auto flex-shrink-0 mx-2 sm:mx-2 px-8 sm:px-10 py-4 sm:py-5 rounded-[1.5rem] font-bold text-sm sm:text-base transition-all shadow-xl ${title.trim() ? 'bg-gradient-to-r from-fuchsia-600 to-indigo-600 text-white' : 'bg-white/5 text-white/10 cursor-not-allowed border border-white/5'}`}>Add Task</motion.button>
                     </div>
                     {isFocused && (
                       <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-6 px-3 sm:px-10 pb-3 sm:pb-4 pt-3 sm:pt-4 border-t border-white/5 mt-2">
