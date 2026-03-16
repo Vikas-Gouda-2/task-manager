@@ -1,152 +1,51 @@
 # Task Manager - Deployment Guide
 
-This guide will help you deploy your Task Manager application to the internet using **Render** (free tier).
-
-## Overview
-
-Your application consists of:
-- **Frontend**: React app (will be hosted on Render as a static site)
-- **Backend**: FastAPI app (will be hosted on Render as a web service)
-
-Both services can run on Render's free tier!
-
----
+This guide will help you deploy your Task Manager application to the internet using **Render Blueprint**. This is the easiest "one-click" way to get both your Frontend and Backend running perfectly.
 
 ## Step 1: Push Your Code to GitHub
 
 Render deploys directly from GitHub. You need to push your code there first.
 
-### Create a GitHub Repository
-
-1. Go to [github.com](https://github.com) and sign in (or create an account)
-2. Click **New Repository**
-3. Name it `task-manager`
-4. Set it to **Public** (free tier requirement)
-5. Click **Create Repository**
-
-### Push Your Code
-
 In your terminal, inside `/Users/viswa/Documents/task_manager`:
 
 ```bash
-git remote add origin https://github.com/Vikas-Gouda-2/task-manager.git
-git branch -M main
-git push -u origin main
-```
-
-Your code is ready! Just execute the commands above to push to GitHub.
-
----
-
-## Step 2: Deploy the Backend on Render
-
-### Create a Render Account
-
-1. Go to [render.com](https://render.com)
-2. Sign up with GitHub (this makes deployment easier)
-3. Click **Authorize Render**
-
-### Deploy Backend Service
-
-1. Click **New** → **Web Service**
-2. Choose your GitHub repository (`task-manager`)
-3. Fill in the settings:
-   - **Name**: `task-manager-api`
-   - **Environment**: `Python 3`
-   - **Build Command**: `pip install -r requirements.txt`
-   - **Start Command**: `uvicorn main:app --host 0.0.0.0 --port $PORT`
-   - **Instance Type**: `Free` (at bottom)
-4. Click **Create Web Service**
-
-Render will automatically build and deploy your backend. You'll get a URL like:
-```
-https://task-manager-api-xxxx.onrender.com
-```
-
-**Save this URL!** You'll need it for the frontend.
-
----
-
-## Step 3: Deploy the Frontend on Render
-
-### Create a Static Site
-
-1. On Render dashboard, click **New** → **Static Site**
-2. Choose your GitHub repository (`task-manager`)
-3. Fill in the settings:
-   - **Name**: `task-manager-frontend`
-   - **Build Command**: `cd frontend && npm install && npm run build`
-   - **Publish Directory**: `frontend/build`
-4. Before deploying, add environment variable:
-   - Go to **Environment** tab
-   - Add:
-     - **Key**: `REACT_APP_API_URL`
-     - **Value**: Your backend URL from Step 2 (e.g., `https://task-manager-api-xxxx.onrender.com`)
-5. Click **Create Static Site**
-
-Render will build and deploy your frontend. You'll get a URL like:
-```
-https://task-manager-frontend-xxxx.onrender.com
+git add .
+git commit -m "Configure for one-click deployment"
+git push origin main
 ```
 
 ---
 
-## Step 4: Share Your Application
+## Step 2: One-Click Deployment on Render
 
-Your application is now live! You can access it at your frontend URL:
-```
-https://task-manager-frontend-xxxx.onrender.com
-```
+1. Go to [dashboard.render.com/blueprints](https://dashboard.render.com/blueprints)
+2. Click **New Blueprint Instance**
+3. Select your GitHub repository (`task-manager`)
+4. Click **Next**
+5. Render will automatically detect the configuration in `render.yaml`.
+6. Click **Apply**
 
-Share this URL with anyone to let them use your task manager!
+---
+
+## Step 3: Access Your App
+
+Render will now build both services. Once complete:
+
+1. Go to your [Render Dashboard](https://dashboard.render.com)
+2. You will see two new services:
+   - **task-manager-api** (Backend)
+   - **task-manager-frontend** (Frontend)
+3. Click on **task-manager-frontend** to find your **Live Link**.
 
 ---
 
 ## Important Notes
 
-### Free Tier Limitations
-- Services spin down after 15 minutes of inactivity
-- First request after idle takes ~30 seconds to start
-- This is normal on the free tier!
+### Data Persistence (SQLite)
+Internal data is stored in `tasks.db` (SQLite). On Render's free tier, this file is reset whenever the service restarts (every 15-30 minutes of inactivity).
+**To keep your data permanently**: Create a free PostgreSQL database on Render and add its **Internal Database URL** as an environment variable named `DATABASE_URL` in your **task-manager-api** service settings.
 
-### Future Upgrades
-When you're ready for production:
-- Upgrade to paid tier for always-on services
-- Add a custom domain
-- Increase database storage
-
----
-
-## Troubleshooting
-
-### Backend not responding?
-1. Check the backend logs on Render dashboard
-2. Verify the API URL in frontend `.env.production`
-3. Check that CORS is enabled in your FastAPI app
-
-### Frontend shows errors?
-1. Open browser DevTools (F12)
-2. Check the Console tab for error messages
-3. Verify `REACT_APP_API_URL` is set correctly
-
-### Want to update your app?
-Just push changes to GitHub:
-```bash
-git add .
-git commit -m "Your changes"
-git push
-```
-
-Render will automatically redeploy!
-
----
-
-## Next Steps
-
-After deployment works:
-1. Add a custom domain (paid feature)
-2. Set up automatic deployments on push (already enabled!)
-3. Monitor performance in Render dashboard
-4. Scale up to paid tier when needed
+### Cold Starts
+Services spin down after 15 minutes of inactivity on the free tier. The first request after a break might take ~30 seconds. This is normal!
 
 Enjoy your live task manager! 🚀
