@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Calendar, Tag, AlignLeft, CheckCircle2, Circle, Trash2, Plus, Flag } from 'lucide-react';
 
-// API Base URL - uses environment variable or defaults to localhost
-const API_BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:8000";
+// API Base URL - Render backend
+const API_BASE_URL = "https://task-manager-api-25gl.onrender.com";
 
 const TaskDetailsModal = ({ task, isOpen, onClose, onUpdate, onDelete }) => {
   const [activeTask, setActiveTask] = useState(task);

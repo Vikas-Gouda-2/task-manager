@@ -8,8 +8,8 @@ import SettingsModal from "./SettingsModal";
 import Dashboard from "./Dashboard";
 import TaskDetailsModal from "./TaskDetailsModal";
 
-// API Base URL - uses environment variable or defaults to localhost
-const API_BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:8000";
+// API Base URL - Render backend
+const API_BASE_URL = "https://task-manager-api-25gl.onrender.com";
 
 // Spring Physics configurations
 const springTransition = {
