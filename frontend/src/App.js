@@ -239,25 +239,45 @@ function App() {
     };
 
     try {
-      await fetch(`${API_BASE_URL}/tasks`, {
+      const res = await fetch(`${API_BASE_URL}/tasks`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
       });
-      setTitle(""); setCategory(""); setDueDate("");
-      fetchTasks();
-    } catch (error) { console.error("Error adding task", error); }
+      
+      if (!res.ok) {
+        console.error(`Error: ${res.status} ${res.statusText}`);
+        return;
+      }
+      
+      const newTask = await res.json();
+      console.log("Task created:", newTask);
+      
+      setTitle(""); 
+      setCategory(""); 
+      setDueDate("");
+      
+      // Update tasks immediately instead of refetching
+      setTasks(prev => [...prev, newTask]);
+      fetchProfile(); // Update profile/XP
+    } catch (error) { 
+      console.error("Error adding task:", error); 
+    }
   };
 
   const completeTask = async (id, isCompleted) => {
     if (!isCompleted) playSound('success');
-    await fetch(`${API_BASE_URL}/tasks/${id}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ completed: !isCompleted })
-    });
-    fetchTasks();
-    fetchProfile();
+    try {
+      const res = await fetch(`${API_BASE_URL}/tasks/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ completed: !isCompleted })
+      });
+      if (res.ok) {
+        setTasks(prev => prev.map(t => t.id === id ? { ...t, completed: !isCompleted } : t));
+        fetchProfile();
+      }
+    } catch (error) { console.error("Error completing task:", error); }
   };
 
   const updateTask = async (id, updates) => {
