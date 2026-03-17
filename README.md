@@ -9,14 +9,18 @@ A complete, production-ready task management application with gamification featu
 ## 🚀 Quick Start
 
 ### Try It Live (No Installation Needed)
-```
-👉 https://task-manager-frontend-0uf5.onrender.com
-```
+**Frontend**: https://task-manager-frontend-0uf5.onrender.com  
+**Backend API**: https://task-manager-api-25g1.onrender.com  
+**GitHub Repo**: https://github.com/Vikas-Gouda-2/task-manager
 
-### View the Code on GitHub
-```
-👉 https://github.com/Vikas-Gouda-2/task-manager
-```
+### ⚡ Frontend Not Loading? 5-Minute Fix
+1. Go to https://dashboard.render.com
+2. Click "task-manager-frontend"
+3. Click "Manual Deploy"
+4. Wait 3-5 minutes
+5. Refresh the app
+
+See `QUICK_FIX_FRONTEND.md` for details.
 
 ---
 
