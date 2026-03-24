@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence, Reorder, useMotionValue, useSpring, useTransform } from "framer-motion";
-import { ListTodo, CheckCircle, Clock, Calendar, Tag, Edit2, X, Check, Timer, Plus, Trash2, Settings, BarChart2, Layout, Award } from "lucide-react";
+import { ListTodo, CheckCircle, Clock, Calendar, Tag, Timer, Plus, Settings, BarChart2, Layout } from "lucide-react";
 import { useSoundEffects } from "./useSoundEffects";
 import { useSettings } from "./SettingsContext";
 import GamificationBar from "./GamificationBar";
@@ -205,6 +205,7 @@ function App() {
 
   useEffect(() => {
     fetchTasks();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     fetchProfile();
   }, []);
 
